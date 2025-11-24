@@ -1,0 +1,472 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>더 부드러운 세겹 휴지 - 무표백, 무형광</title>
+    <!-- 나눔고딕라운드 폰트 로드 (둥글고 귀여운 컨셉) -->
+    <link href="https://fonts.googleapis.com/css2?family=Nanum+Round+Gothic:wght@400;700;800&display=swap" rel="stylesheet">
+    
+    <!-- 기본 스타일 및 서체 설정 --><style>
+        /* 기본 스타일 및 리셋 */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            /* 폰트 변경: 'Nanum Round Gothic'을 최우선으로 적용 */
+            font-family: 'Nanum Round Gothic', 'Noto Sans KR', 'Roboto', sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f7f9fb; /* 매우 밝은 파스텔톤 배경 (화이트톤 유지) */
+            padding-top: 80px; /* 고정 헤더 높이만큼 여백 */
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 16px;
+        }
+
+        /* 헤더 스타일 (고정) */
+        header {
+            background-color: #fff;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+        }
+
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 0;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #6366f1; /* 파스텔 블루-보라 계열 */
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+        }
+
+        .nav-links li a {
+            padding: 10px 15px;
+            display: block;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        .nav-links li a:hover {
+            color: #8b5cf6;
+        }
+
+        /* 메인 섹션 스타일 */
+        .hero-section {
+            text-align: center;
+            padding: 80px 0;
+            background-color: #f0f9ff; /* 밝은 화이트톤 하늘색으로 변경 */
+            margin-bottom: 40px;
+        }
+
+        .hero-section h1 {
+            font-size: 3rem;
+            margin-bottom: 10px;
+            color: #1f2937; /* 가독성을 위해 어두운 텍스트 유지 */
+        }
+
+        .hero-section p {
+            font-size: 1.25rem;
+            margin-bottom: 30px;
+            color: #4b5563; /* 좀 더 부드러운 회색 텍스트 */
+        }
+
+        .event-badge {
+            display: inline-block;
+            background-color: #fca5a5; /* 파스텔 레드 (1+1 강조) */
+            color: white;
+            padding: 8px 20px;
+            border-radius: 9999px;
+            font-weight: bold;
+            letter-spacing: 0.5px;
+            margin-bottom: 40px;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); opacity: 1; }
+            50% { transform: scale(1.05); opacity: 0.8; }
+            100% { transform: scale(1); opacity: 1; }
+        }
+
+        /* 제품 이미지 컨테이너 (플레이스홀더 대신 이미지를 담기 위한) */
+        .product-image-container {
+            width: 100%;
+            max-width: 400px;
+            height: 300px; /* 고정 높이 */
+            margin: 0 auto 30px;
+            border: 3px solid #93c5fd; /* 더 밝은 파스텔 블루 테두리 */
+            border-radius: 10px;
+            overflow: hidden; /* 이미지가 컨테이너를 넘어가지 않도록 */
+            display: flex; /* 이미지 중앙 정렬을 위해 */
+            justify-content: center;
+            align-items: center;
+        }
+
+        .product-image-container img {
+            width: 100%; /* 컨테이너 너비에 맞춤 */
+            height: 100%; /* 컨테이너 높이에 맞춤 */
+            object-fit: cover; /* 이미지가 비율을 유지하며 컨테이너를 채우도록 */
+            display: block;
+        }
+
+
+        /* CTA 버튼 스타일 */
+        .cta-button {
+            display: inline-block;
+            background-color: #6366f1;
+            color: white;
+            padding: 15px 30px;
+            border-radius: 8px;
+            font-size: 1.1rem;
+            font-weight: 700;
+            transition: background-color 0.3s, transform 0.1s;
+        }
+
+        .cta-button:hover {
+            background-color: #4f46e5;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        /* 일반 섹션 스타일 */
+        section {
+            padding: 60px 0;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2rem;
+            margin-bottom: 40px;
+            color: #374151;
+            border-bottom: 2px solid #e5e7eb;
+            display: inline-block;
+            padding-bottom: 8px;
+        }
+
+        /* 기능 더보기 섹션 (동적 영역) */
+        #features {
+            background-color: #fff;
+            border-radius: 12px;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+            padding: 40px;
+            text-align: center;
+        }
+
+        #feature-details {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.5s ease-out, padding 0.5s ease-out;
+            padding-top: 0;
+            text-align: left;
+        }
+
+        #feature-details.open {
+            max-height: 500px; /* 충분히 큰 값으로 설정 */
+            padding-top: 20px;
+        }
+
+        .detail-item {
+            margin-bottom: 15px;
+            padding: 10px 0;
+            border-bottom: 1px dashed #e5e7eb;
+        }
+
+        .detail-item:last-child {
+            border-bottom: none;
+        }
+
+        .detail-item h4 {
+            color: #10b981; /* 파스텔 녹색 */
+            font-size: 1.1rem;
+            margin-bottom: 5px;
+        }
+
+        .toggle-button {
+            background-color: #10b981;
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 1rem;
+            font-weight: 600;
+            transition: background-color 0.3s;
+            margin-top: 20px;
+        }
+
+        .toggle-button:hover {
+            background-color: #059669;
+        }
+
+        /* 후기 섹션 (카드 형식) */
+        .review-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+        }
+
+        .review-card {
+            background-color: #fff;
+            padding: 25px;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+            border-left: 5px solid #f97316; /* 파스텔 주황색 포인트 */
+        }
+
+        .review-card p {
+            margin-bottom: 15px;
+            font-style: italic;
+        }
+
+        .review-card small {
+            display: block;
+            text-align: right;
+            font-weight: 600;
+            color: #4b5563;
+        }
+
+        /* 마무리 CTA 섹션 */
+        .cta-end-section {
+            text-align: center;
+            background-color: #fff7ed; /* 밝은 화이트톤 오렌지/노랑으로 변경 */
+            padding: 60px 20px;
+            border-radius: 12px;
+            margin-bottom: 40px;
+        }
+
+        .cta-end-section h2 {
+            font-size: 2rem;
+            color: #b45309; /* 텍스트 색상 조정 */
+            margin-bottom: 20px;
+        }
+
+        /* 푸터 스타일 */
+        footer {
+            background-color: #e5e7eb; /* 밝은 파스텔톤 회색으로 변경 */
+            color: #4b5563; /* 텍스트 색상 어둡게 조정 */
+            padding: 40px 0;
+            font-size: 0.9rem;
+        }
+
+        .footer-content {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+        }
+
+        .footer-info, .footer-links {
+            margin-bottom: 20px;
+        }
+
+        .footer-links a {
+            margin-right: 15px;
+            color: #6b7280; /* 링크 색상 조정 */
+        }
+
+        .footer-links a:hover {
+            color: #1f2937; /* 호버 색상 조정 */
+        }
+
+        /* 모바일 반응형 디자인 (768px 이하) */
+        @media (max-width: 768px) {
+            .navbar {
+                flex-direction: column;
+            }
+            
+            .logo {
+                margin-bottom: 10px;
+            }
+
+            .nav-links {
+                width: 100%;
+                justify-content: space-around;
+                padding-top: 10px;
+                border-top: 1px solid #eee;
+            }
+
+            .nav-links li a {
+                padding: 5px 10px;
+                font-size: 0.9rem;
+            }
+
+            .hero-section h1 {
+                font-size: 2.5rem;
+            }
+
+            .hero-section p {
+                font-size: 1rem;
+            }
+
+            .review-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .footer-content {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .footer-links {
+                margin-top: 10px;
+            }
+
+            .footer-links a {
+                margin: 0 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- 1. 헤더 (최상단 메뉴 포함) --><header>
+        <div class="container">
+            <div class="navbar">
+                <div class="logo">TISSUE WORLD</div>
+                <nav>
+                    <ul class="nav-links">
+                        <li><a href="#intro">제품 소개</a></li>
+                        <li><a href="#features">기능 보기</a></li>
+                        <li><a href="#reviews">후기</a></li>
+                        <li><a href="https://example.com/qna" class="cta-link">문의하기</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <!-- 2. 제품 이미지 및 주요 특징 소개 (Hero Section) --><section class="hero-section" id="intro">
+            <div class="container">
+                <span class="event-badge">✨ 단독 1 + 1 이벤트 진행 중! ✨</span>
+                <h1>더 부드러운 세겹 휴지</h1>
+                <p>무표백, 무형광, 더 도톰한 세겹! 먼지 없이 부드러운 프리미엄 화장지</p>
+                
+                <!-- 제품 메인 이미지 삽입 --><div class="product-image-container">
+                    <img src="tissue.jpg" alt="더 부드러운 세겹 휴지 메인 이미지">
+                </div>
+                
+                <!-- CTA 버튼 --><a href="https://example.com/qna" class="cta-button">
+                    지금 바로 문의하기
+                </a>
+            </div>
+        </section>
+
+        <!-- 3. "기능 더보기" 동적 영역 --><section id="features" class="container">
+            <h2 class="section-title">제품의 놀라운 기능</h2>
+            <p>직접 느껴보셔야 압니다. 주요 장점을 확인하세요.</p>
+
+            <button id="toggleFeaturesButton" class="toggle-button">
+                기능 상세 내용 펼치기
+            </button>
+            
+            <div id="feature-details">
+                <div class="detail-item">
+                    <h4>✅ 3겹 도톰함의 완성</h4>
+                    <p>휴지가 쉽게 찢어지거나 손에 묻어나는 불편함 없이, 뛰어난 흡수력과 내구성을 자랑합니다.</p>
+                </div>
+                <div class="detail-item">
+                    <h4>🌳 무표백 & 무형광 안심</h4>
+                    <p>민감한 피부에도 안전하게 사용할 수 있도록 어떠한 표백제나 형광 물질도 사용하지 않았습니다.</p>
+                </div>
+                <div class="detail-item">
+                    <h4>🚫 먼지 없는 클린 케어</h4>
+                    <p>사용 시 발생하는 미세 먼지를 최소화하여 호흡기 건강까지 생각한 깨끗한 휴지입니다.</p>
+                </div>
+                <div class="detail-item">
+                    <h4>☁️ 실크처럼 부드러운 촉감</h4>
+                    <p>피부에 닿는 순간 느껴지는 놀라운 부드러움으로 차원이 다른 사용감을 선사합니다.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- 4. 사용 예시 또는 후기 (카드 형식) --><section id="reviews" class="container">
+            <h2 class="section-title">실제 사용자 후기</h2>
+            
+            <div class="review-grid">
+                <article class="review-card">
+                    <p>"먼지 때문에 항상 기침했는데, 이 휴지로 바꾸고 코가 편안해졌어요. 부드러움은 덤!"</p>
+                    <small>- 김*진 고객님</small>
+                </article>
+                <article class="review-card">
+                    <p>"1+1 이벤트 때 구매했는데, 품질이 너무 좋아서 정가 주고도 계속 쓸 것 같아요. 재구매 의사 100%!"</p>
+                    <small>- 박*수 고객님</small>
+                </article>
+                <article class="review-card">
+                    <p>"도톰한데 무겁지 않고, 물에도 잘 녹아서 변기 막힐 걱정도 덜었습니다. 주방에서도 유용해요."</p>
+                    <small>- 이*영 고객님</small>
+                </article>
+            </div>
+        </section>
+
+        <!-- 5. CTA 버튼이 포함된 마무리 섹션 --><section class="cta-end-section container">
+            <h2>지금 바로 부드러움을 경험하세요!</h2>
+            <p>궁금한 점이 있으시다면 언제든지 문의해 주세요.</p>
+            <a href="https://example.com/qna" class="cta-button">
+                문의하기
+            </a>
+        </section>
+    </main>
+
+    <!-- 6. 푸터 --><footer>
+        <div class="container footer-content">
+            <div class="footer-info">
+                <p>&copy; 2025 프리미엄 생활용품. All rights reserved.</p>
+                <p>주소: 서울특별시 강남구 테헤란로 123 | 사업자 등록번호: 123-45-67890</p>
+            </div>
+            <div class="footer-links">
+                <a href="#">이메일: contact@example.com</a>
+                <a href="#">전화: 02-1234-5678</a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript: 기능 상세 토글 구현 --><script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const button = document.getElementById('toggleFeaturesButton');
+            const details = document.getElementById('feature-details');
+
+            // 초기 상태: 접혀있음
+            details.classList.remove('open');
+            button.textContent = '기능 상세 내용 펼치기';
+            
+            button.addEventListener('click', () => {
+                // 'open' 클래스가 없으면 추가(펼치기), 있으면 제거(접기)
+                const isOpen = details.classList.toggle('open');
+                
+                // 버튼 텍스트 업데이트
+                if (isOpen) {
+                    button.textContent = '기능 상세 내용 접기';
+                } else {
+                    button.textContent = '기능 상세 내용 펼치기';
+                }
+            });
+        });
+    </script>
+
+</body>
+</html>
